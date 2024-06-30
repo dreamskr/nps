@@ -4,7 +4,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5><span id="langtag"></span><span></span></h5>
+                    <h5><span id="langtag"></span><span></span></h5> <h5><span langtag="tcp-remark" style="color:blue">  </span><span></span></h5>
 
                     <div class="ibox-tools">
                         <a class="collapse-link">
@@ -47,6 +47,8 @@
             return {
                 "offset": params.offset,
                 "limit": params.limit,
+                "sort": params.sort,
+                "order": params.order,
                 "type":{{.type}},
                 "client_id":{{.client_id}},
                 "search": params.search
@@ -93,20 +95,30 @@
         },
         //表格的列
         columns: [
+            // {
+            //     field: 'sId',//域值
+            //     title: '<span langtag="word-clientid"></span>',//标题
+            //     halign: 'center',
+            //     visible: true,//false表示不显示
+            //     formatter: function (value, row, index) {
+            //         return row.Client.Id
+            //     }
+            // },
             {
                 field: 'Id',//域值
                 title: '<span langtag="word-id"></span>',//标题
                 halign: 'center',
-                visible: true//false表示不显示
-            },
-            {
-                field: 'Id',//域值
-                title: '<span langtag="word-clientid"></span>',//标题
-                halign: 'center',
                 visible: true,//false表示不显示
                 sortable: true,//启用排序
+      
+            },
+            {
+                field: 'sName',//域值
+                title: '<span langtag="word-belongclient"></span>',//标题
+                halign: 'center',
+                visible: true,//false表示不显示
                 formatter: function (value, row, index) {
-                    return row.Client.Id
+                    return row.Client.Remark
                 }
             },
             {
@@ -115,12 +127,6 @@
                 halign: 'center',
                 visible: true,//false表示不显示
                 sortable: true//启用排序
-            },
-            {
-                field: 'Client.VerifyKey',//域值
-                title: '<span langtag="word-verifykey"></span>',//标题
-                halign: 'center',
-                visible: true//false表示不显示
             },
             {
                 field: 'Mode',//域值
@@ -160,7 +166,6 @@
                 align: 'center',
                 halign: 'center',
                 visible: true,//false表示不显示
-                sortable: true,//启用排序
                 formatter: function (value, row, index) {
                     if (value) {
                         return '<span class="badge badge-primary" langtag="word-open"></span>'
@@ -175,7 +180,6 @@
                 align: 'center',
                 halign: 'center',
                 visible: true,//false表示不显示
-                sortable: true,//启用排序
                 formatter: function (value, row, index) {
                     if (value) {
                         return '<span class="badge badge-primary" langtag="word-open"></span>'
@@ -190,7 +194,6 @@
                 align: 'center',
                 halign: 'center',
                 visible: true,//false表示不显示
-                sortable: true,//启用排序
                 formatter: function (value, row, index) {
                     if (row.Client.IsConnect) {
                         return '<span class="badge badge-primary" langtag="word-online"></span>'
