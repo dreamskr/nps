@@ -240,7 +240,7 @@ func DelTask(id int) error {
 }
 
 //get task list by page num
-func GetTunnel(start, length int, typeVal string, clientId int, search string) ([]*file.Tunnel, int) {
+func GetTunnel(start, length int, typeVal string, clientId int, search string, sortField string, order string) ([]*file.Tunnel, int) {
 	all_list := make([]*file.Tunnel,0) //store all Tunnel
 	list := make([]*file.Tunnel, 0)
 	var cnt int
