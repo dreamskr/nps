@@ -104,6 +104,7 @@
                 title: '<span langtag="word-clientid"></span>',//标题
                 halign: 'center',
                 visible: true,//false表示不显示
+                sortable: true,//启用排序
                 formatter: function (value, row, index) {
                     return row.Client.Id
                 }
@@ -112,7 +113,8 @@
                 field: 'Remark',//域值
                 title: '<span langtag="word-remark"></span>',//标题
                 halign: 'center',
-                visible: true//false表示不显示
+                visible: true,//false表示不显示
+                sortable: true//启用排序
             },
             {
                 field: 'Client.VerifyKey',//域值
@@ -133,6 +135,7 @@
                 field: 'Port',//域值
                 title: '<span langtag="word-port"></span>',//标题
                 halign: 'center',
+                sortable: true,//启用排序
                 visible: true//false表示不显示
             },
             {
@@ -140,6 +143,7 @@
                 title: '<span langtag="word-target"></span>',//标题
                 halign: 'center',
                 visible: true,//false表示不显示
+                sortable: true,//启用排序
                 formatter: function (value, row, index) {
                     return row.Target.TargetStr
                 }
@@ -156,6 +160,7 @@
                 align: 'center',
                 halign: 'center',
                 visible: true,//false表示不显示
+                sortable: true,//启用排序
                 formatter: function (value, row, index) {
                     if (value) {
                         return '<span class="badge badge-primary" langtag="word-open"></span>'
@@ -170,6 +175,7 @@
                 align: 'center',
                 halign: 'center',
                 visible: true,//false表示不显示
+                sortable: true,//启用排序
                 formatter: function (value, row, index) {
                     if (value) {
                         return '<span class="badge badge-primary" langtag="word-open"></span>'
@@ -184,6 +190,7 @@
                 align: 'center',
                 halign: 'center',
                 visible: true,//false表示不显示
+                sortable: true,//启用排序
                 formatter: function (value, row, index) {
                     if (row.Client.IsConnect) {
                         return '<span class="badge badge-primary" langtag="word-online"></span>'
