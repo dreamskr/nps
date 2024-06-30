@@ -101,8 +101,9 @@ func (s *ClientController) Edit() {
 	if s.Ctx.Request.Method == "GET" {
 		s.Data["menu"] = "client"
 		if c, err := file.GetDb().GetClient(id); err != nil {
-			//s.error()
-			s.AjaxErr("client id no exist")
+			s.error()
+			s.AjaxErr("client ID not found")
+			return
 		} else {
 			s.Data["c"] = c
 			s.Data["BlackIpList"] = strings.Join(c.BlackIpList, "\r\n")
