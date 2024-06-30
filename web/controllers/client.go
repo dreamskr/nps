@@ -72,7 +72,12 @@ func (s *ClientController) Add() {
 		if err := file.GetDb().NewClient(t); err != nil {
 			s.AjaxErr(err.Error())
 		}
-		s.AjaxOkWithId("add success", id)
+		data := make(map[string]interface{})
+		data["msg"] = "add success"
+		data["status"] = 1
+		data["data"] = t
+		s.Data["json"] = data
+		s.ServeJSON()
 	}
 }
 func (s *ClientController) GetClient() {
@@ -96,7 +101,8 @@ func (s *ClientController) Edit() {
 	if s.Ctx.Request.Method == "GET" {
 		s.Data["menu"] = "client"
 		if c, err := file.GetDb().GetClient(id); err != nil {
-			s.error()
+			//s.error()
+			s.AjaxErr("client id no exist")
 		} else {
 			s.Data["c"] = c
 			s.Data["BlackIpList"] = strings.Join(c.BlackIpList, "\r\n")
@@ -150,8 +156,15 @@ func (s *ClientController) Edit() {
 
 			c.BlackIpList = RemoveRepeatedElement(strings.Split(s.getEscapeString("blackiplist"), "\r\n"))
 			file.GetDb().JsonDb.StoreClientsToJsonFile()
+			//更新
+			data := make(map[string]interface{})
+			data["msg"] = "modified success"
+			data["status"] = 1
+			data["data"] = c
+			s.Data["json"] = data
+		        s.ServeJSON()
 		}
-		s.AjaxOk("save success")
+		//s.AjaxOk("save success")
 	}
 }
 
