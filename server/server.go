@@ -241,16 +241,56 @@ func DelTask(id int) error {
 
 //get task list by page num
 func GetTunnel(start, length int, typeVal string, clientId int, search string) ([]*file.Tunnel, int) {
+	all_list := make([]*file.Tunnel,0) //store all Tunnel
 	list := make([]*file.Tunnel, 0)
 	var cnt int
 	keys := file.GetMapKeys(file.GetDb().JsonDb.Tasks, false, "", "")
+
+	//get all Tunnel and sort
 	for _, key := range keys {
 		if value, ok := file.GetDb().JsonDb.Tasks.Load(key); ok {
 			v := value.(*file.Tunnel)
 			if (typeVal != "" && v.Mode != typeVal || (clientId != 0 && v.Client.Id != clientId)) || (typeVal == "" && clientId != v.Client.Id) {
 				continue
 			}
-			if search != "" && !(v.Id == common.GetIntNoErrByStr(search) || v.Port == common.GetIntNoErrByStr(search) || strings.Contains(v.Password, search) || strings.Contains(v.Remark, search) || strings.Contains(v.Client.VerifyKey, search) || strings.Contains(v.Target.TargetStr, search)) {
+			all_list = append(all_list,v)
+		}
+	}
+	//sort by Id, Remark, TargetStr, Port, asc or desc
+	if sortField=="Id" {
+		if order=="asc"{
+			sort.SliceStable(all_list, func(i, j int) bool { return all_list[i].Id < all_list[j].Id })
+	    } else {
+			sort.SliceStable(all_list, func(i, j int) bool { return all_list[i].Id > all_list[j].Id })
+	    }
+	} else if sortField=="Remark" {
+		if order=="asc"{
+			sort.SliceStable(all_list, func(i, j int) bool { return all_list[i].Remark < all_list[j].Remark })
+		} else {
+			sort.SliceStable(all_list, func(i, j int) bool { return all_list[i].Remark > all_list[j].Remark })
+		}
+	} else if sortField=="TargetStr" {
+		if order=="asc"{
+			sort.SliceStable(all_list, func(i, j int) bool { return all_list[i].Target.TargetStr < all_list[j].Target.TargetStr })
+		} else {
+			sort.SliceStable(all_list, func(i, j int) bool { return all_list[i].Target.TargetStr > all_list[j].Target.TargetStr })
+		}
+	}  else {
+		if order=="asc"{
+			sort.SliceStable(all_list, func(i, j int) bool { return all_list[i].Port < all_list[j].Port })
+		} else {
+			sort.SliceStable(all_list, func(i, j int) bool { return all_list[i].Port > all_list[j].Port })
+		}
+	}
+	
+	//search
+	for _, key := range all_list {
+		if value, ok := file.GetDb().JsonDb.Tasks.Load(key.Id); ok {
+			v := value.(*file.Tunnel)
+			if (typeVal != "" && v.Mode != typeVal || (clientId != 0 && v.Client.Id != clientId)) || (typeVal == "" && clientId != v.Client.Id) {
+				continue
+			}
+			if search != "" && !(v.Id == common.GetIntNoErrByStr(search) || v.Port == common.GetIntNoErrByStr(search) || strings.Contains(v.Password, search) || strings.Contains(v.Remark, search) || strings.Contains(v.Target.TargetStr, search)) {
 				continue
 			}
 			cnt++
@@ -261,7 +301,6 @@ func GetTunnel(start, length int, typeVal string, clientId int, search string) (
 			}
 			if start--; start < 0 {
 				if length--; length >= 0 {
-					//if _, ok := RunList[v.Id]; ok {
 					if _, ok := RunList.Load(v.Id); ok {
 						v.RunStatus = true
 					} else {
@@ -272,8 +311,6 @@ func GetTunnel(start, length int, typeVal string, clientId int, search string) (
 			}
 		}
 	}
-	//对端口进行排序
-	sort.SliceStable(list, func(i, j int) bool { return list[i].Port < list[j].Port })
 	return list, cnt
 }
 
