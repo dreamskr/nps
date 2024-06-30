@@ -131,12 +131,12 @@ func main() {
 			svcConfig.Executable = binPath
 			s, err := service.New(prg, svcConfig)
 			if err != nil {
-				(err)
+				logs.Error(err)
 				return
 			}
 			err = service.Control(s, os.Args[1])
 			if err != nil {
-				("Valid actions: %q\n%s", service.ControlAction, err.Error())
+				logs.Error("Valid actions: %q\n%s", service.ControlAction, err.Error())
 			}
 			if service.Platform() == "unix-systemv" {
 				logs.Info("unix-systemv service")
@@ -151,19 +151,19 @@ func main() {
 				cmd := exec.Command("/etc/init.d/"+svcConfig.Name, os.Args[1])
 				err := cmd.Run()
 				if err != nil {
-					(err)
+					logs.Error(err)
 				}
 				return
 			}
 			err := service.Control(s, os.Args[1])
 			if err != nil {
-				("Valid actions: %q\n%s", service.ControlAction, err.Error())
+				logs.Error("Valid actions: %q\n%s", service.ControlAction, err.Error())
 			}
 			return
 		case "uninstall":
 			err := service.Control(s, os.Args[1])
 			if err != nil {
-				("Valid actions: %q\n%s", service.ControlAction, err.Error())
+				logs.Error("Valid actions: %q\n%s", service.ControlAction, err.Error())
 			}
 			if service.Platform() == "unix-systemv" {
 				logs.Info("unix-systemv service")
