@@ -127,7 +127,13 @@ func (s *IndexController) Add() {
 		if err := server.AddTask(t); err != nil {
 			s.AjaxErr(err.Error())
 		} else {
-			s.AjaxOkWithId("add success", id)
+			//s.AjaxOkWithId("add success", id)
+			data := make(map[string]interface{})
+			data["msg"] = "add success"
+			data["status"] = 1
+			data["data"] = t
+			s.Data["json"] = data
+			s.ServeJSON()
 		}
 	}
 }
@@ -147,7 +153,8 @@ func (s *IndexController) Edit() {
 	id := s.GetIntNoErr("id")
 	if s.Ctx.Request.Method == "GET" {
 		if t, err := file.GetDb().GetTask(id); err != nil {
-			s.error()
+			//s.error()
+			s.AjaxErr("tunnel id no exist")
 		} else {
 			s.Data["t"] = t
 		}
@@ -187,8 +194,16 @@ func (s *IndexController) Edit() {
 			file.GetDb().UpdateTask(t)
 			server.StopServer(t.Id)
 			server.StartTask(t.Id)
+
+			//修改
+			data := make(map[string]interface{})
+			data["msg"] = "modified success"
+			data["status"] = 1
+			data["data"] = t
+			s.Data["json"] = data
+		        s.ServeJSON()
 		}
-		s.AjaxOk("modified success")
+		//s.AjaxOk("modified success")
 	}
 }
 
@@ -281,7 +296,14 @@ func (s *IndexController) AddHost() {
 		if err := file.GetDb().NewHost(h); err != nil {
 			s.AjaxErr("add fail" + err.Error())
 		}
-		s.AjaxOkWithId("add success", id)
+		//s.AjaxOkWithId("add success", id)
+		//更新
+		data := make(map[string]interface{})
+		data["msg"] = "add success"
+		data["status"] = 1
+		data["data"] = h
+		s.Data["json"] = data
+		s.ServeJSON()
 	}
 }
 
@@ -290,7 +312,8 @@ func (s *IndexController) EditHost() {
 	if s.Ctx.Request.Method == "GET" {
 		s.Data["menu"] = "host"
 		if h, err := file.GetDb().GetHostById(id); err != nil {
-			s.error()
+			//s.error()
+			s.AjaxErr("host id no exist")
 		} else {
 			s.Data["h"] = h
 		}
@@ -327,7 +350,15 @@ func (s *IndexController) EditHost() {
 			h.Target.LocalProxy = s.GetBoolNoErr("local_proxy")
 			h.AutoHttps = s.GetBoolNoErr("AutoHttps")
 			file.GetDb().JsonDb.StoreHostToJsonFile()
+
+			//更新
+			data := make(map[string]interface{})
+			data["msg"] = "modified success"
+			data["status"] = 1
+			data["data"] = h
+			s.Data["json"] = data
+		        s.ServeJSON()
 		}
-		s.AjaxOk("modified success")
+		//s.AjaxOk("modified success")
 	}
 }
