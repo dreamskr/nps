@@ -161,6 +161,10 @@
 		<zh-CN>桥接模式</zh-CN>
 		<en-US>Bridging mode</en-US>
 	</lang>
+	<lang id="word-belongclient">
+		<zh-CN>所属客户端</zh-CN>
+		<en-US>Blong Client</en-US>
+	</lang>
 	<lang id="word-clientid">
 		<zh-CN>客户端 ID</zh-CN>
 		<en-US>Client ID</en-US>
