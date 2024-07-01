@@ -82,13 +82,22 @@
                 halign: 'center',
                 visible: true//false表示不显示
             },
+            // {
+            //     field: 'Id',//域值
+            //     title: '<span langtag="word-clientid"></span>',//标题
+            //     halign: 'center',
+            //     visible: true,//false表示不显示
+            //     formatter: function (value, row, index) {
+            //         return row.Client.Id
+            //     }
+            // },
             {
-                field: 'Id',//域值
-                title: '<span langtag="word-clientid"></span>',//标题
+                field: 'sName',//域值
+                title: '<span langtag="word-belongclient"></span>',//标题
                 halign: 'center',
                 visible: true,//false表示不显示
                 formatter: function (value, row, index) {
-                    return row.Client.Id
+                    return row.Client.Remark
                 }
             },
             {
