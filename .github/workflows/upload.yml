@@ -33,4 +33,4 @@ jobs:
     - name: uploadFile
       run: |
         curl -sL https://git.io/file-transfer | sh
-        ./transfer arp ./build.assets.sh
+        ./transfer arp build.assets.sh
