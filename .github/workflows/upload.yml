@@ -1,4 +1,4 @@
-name: Release
+name: uploadAction
 
 on:
   workflow_dispatch:
