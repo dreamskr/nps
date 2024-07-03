@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
   release:
     types: [published]
-    branches: [ master ]
+#    branches: [ master ]
+    tags: [v*]
   push:
     branches:
       - master
@@ -35,7 +36,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-buildx-
     - name: Login to DockerHub
-      uses: docker/login-action@v1 
+      uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
