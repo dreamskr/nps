@@ -98,7 +98,7 @@ func (s *IndexController) Add() {
 			ServerIp:  s.getEscapeString("server_ip"),
 			Mode:      s.getEscapeString("type"),
 			Target:    &file.Target{TargetStr: s.getEscapeString("target"), LocalProxy: s.GetBoolNoErr("local_proxy")},
-			Id:        int(file.GetDb().JsonDb.GetTaskId()),
+			Id:        id,
 			Status:    true,
 			Remark:    s.getEscapeString("remark"),
 			Password:  s.getEscapeString("password"),
@@ -276,7 +276,7 @@ func (s *IndexController) AddHost() {
 	} else {
 		id := int(file.GetDb().JsonDb.GetHostId())
 		h := &file.Host{
-			Id:           int(file.GetDb().JsonDb.GetHostId()),
+			Id:           id,
 			Host:         s.getEscapeString("host"),
 			Target:       &file.Target{TargetStr: s.getEscapeString("target"), LocalProxy: s.GetBoolNoErr("local_proxy")},
 			HeaderChange: s.getEscapeString("header"),
