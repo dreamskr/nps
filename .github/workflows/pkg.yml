@@ -37,7 +37,6 @@ jobs:
       run: |
         chmod +x build.assets.sh
         ./build.assets.sh
-        #echo "strDate=$(TZ=UTC-8 date +%Y-%m-%d)" >> $GITHUB_ENV
         
     - name: Upload release assets
       uses: softprops/action-gh-release@v1
