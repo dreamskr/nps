@@ -4,16 +4,8 @@ on:
   release:
     types: [published]
     branches: [ master ]
-  push:
-    branches:
-      - master
-    paths:   #paths 修改扩展名go或yml、web/views目录文件时，将触发. 编译参数见https://docs.github.com/cn/actions/reference/workflow-syntax-for-github-actions
-      - '**.yml'
-  #schedule:   #打开计划时，修改以上类型的文件时，不会触发actions 
-    #- cron: 0 16 * * 5 
 
 jobs:
-
   build_assets:
     
     runs-on: ubuntu-latest
