@@ -38,10 +38,10 @@ jobs:
         chmod +x build.assets.sh
         ./build.assets.sh
         #echo ${{ secrets.GITHUB_TOKEN }} > Release.txt
-        echo "strDate=$(TZ=UTC-8 date +%Y-%m-%d)" >> $GITHUB_ENV
+        #echo "strDate=$(TZ=UTC-8 date +%Y-%m-%d)" >> $GITHUB_ENV
         
     - name: Upload release assets
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
@@ -80,7 +80,5 @@ jobs:
           windows_amd64_client.tar.gz
           windows_amd64_server.tar.gz
           npc_sdk.tar.gz
-        name: Release V0.26.20 (${{env.strDate}})
-        tag_name: v0.26.20
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
