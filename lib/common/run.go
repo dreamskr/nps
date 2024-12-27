@@ -31,17 +31,14 @@ func GetRunPath() string {
 //Different systems get different installation paths
 func GetInstallPath() string {
 	var path string
-
 	if ConfPath != "" {
 		return ConfPath
 	}
-
 	if IsWindows() {
-		path = `C:\Program Files\nps`
+		path = GetAppPath()
 	} else {
 		path = "/etc/nps"
 	}
-
 	return path
 }
 
