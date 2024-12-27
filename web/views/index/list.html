@@ -4,7 +4,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5><span id="langtag"></span><span></span></h5>
+                    <h5><span id="langtag"></span><span></span></h5><h5><span langtag="tcp-remark" style="color:blue">  </span><span></span></h5>
 
                     <div class="ibox-tools">
                         <a class="collapse-link">
@@ -102,14 +102,24 @@
                 visible: true,//false表示不显示
                 sortable: true,//启用排序
             },
+            // {
+            //     field: 'ClientId',//域值
+            //     title: '<span langtag="word-clientid"></span>',//标题
+            //     halign: 'center',
+            //     visible: true,//false表示不显示
+            //     // sortable: true, //启用排序
+            //     formatter: function (value, row, index) {
+            //         return row.Client.Id + '-' + row.Client.Remark
+            //     }
+            // },
             {
-                field: 'ClientId',//域值
-                title: '<span langtag="word-clientid"></span>',//标题
+                field: 'sName',//域值
+                title: '<span langtag="word-belongclient"></span>',//标题
                 halign: 'center',
                 visible: true,//false表示不显示
-                sortable: true, //启用排序
+                // ortable: true, //启用排序
                 formatter: function (value, row, index) {
-                    return row.Client.Id + '-' + row.Client.Remark
+                    return row.Client.Remark
                 }
             },
             {
@@ -117,13 +127,14 @@
                 title: '<span langtag="word-remark"></span>',//标题
                 halign: 'center',
                 visible: true//false表示不显示
+                sortable: true//启用排序
             },
             {
                 field: 'Client.VerifyKey',//域值
                 title: '<span langtag="word-verifykey"></span>',//标题
                 halign: 'center',
                 sortable: true, //启用排序
-                visible: true//false表示不显示
+                visible: false//false表示不显示
             },
             {
                 field: 'Mode',//域值
@@ -142,7 +153,7 @@
                 visible: true//false表示不显示
             },
             {
-                field: 'Target',//域值
+                field: 'TargetStr',//域值
                 title: '<span langtag="word-target"></span>',//标题
                 halign: 'center',
                 visible: true,//false表示不显示
