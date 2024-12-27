@@ -191,17 +191,20 @@ func downloadLatest(bin string) string {
 }
 
 func copyStaticFile(srcPath, bin string) string {
-	path := common.GetInstallPath()
-	if bin == "nps" {
-		//复制文件到对应目录
-		if err := CopyDir(filepath.Join(srcPath, "web", "views"), filepath.Join(path, "web", "views")); err != nil {
-			log.Fatalln(err)
+	// linux修改目录权限
+	if !common.IsWindows() {
+		path := common.GetInstallPath()
+		if bin == "nps" {
+			//复制文件到对应目录
+			if err := CopyDir(filepath.Join(srcPath, "web", "views"), filepath.Join(path, "web", "views")); err != nil {
+				log.Fatalln(err)
+			}
+			chMod(filepath.Join(path, "web", "views"), 0766)
+			if err := CopyDir(filepath.Join(srcPath, "web", "static"), filepath.Join(path, "web", "static")); err != nil {
+				log.Fatalln(err)
+			}
+			chMod(filepath.Join(path, "web", "static"), 0766)
 		}
-		chMod(filepath.Join(path, "web", "views"), 0766)
-		if err := CopyDir(filepath.Join(srcPath, "web", "static"), filepath.Join(path, "web", "static")); err != nil {
-			log.Fatalln(err)
-		}
-		chMod(filepath.Join(path, "web", "static"), 0766)
 	}
 	binPath, _ := filepath.Abs(os.Args[0])
 	if !common.IsWindows() {
@@ -252,14 +255,14 @@ func InstallNps() string {
 	}
 	binPath := copyStaticFile(common.GetAppPath(), "nps")
 	log.Println("install ok!")
-	log.Println("Static files and configuration files in the current directory will be useless")
-	log.Println("The new configuration file is located in", path, "you can edit them")
+	//log.Println("Static files and configuration files in the current directory will be useless")
+	log.Println("The current configuration file is located in", path, "you can edit them")
 	if !common.IsWindows() {
 		log.Println(`You can start with:
 nps start|stop|restart|uninstall|update or nps-update update
 anywhere!`)
 	} else {
-		log.Println(`You can copy executable files to any directory and start working with:
+		log.Println(`You can start working with:
 nps.exe start|stop|restart|uninstall|update or nps-update.exe update
 now!`)
 	}
