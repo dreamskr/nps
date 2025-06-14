@@ -1,32 +1,97 @@
-# NPS
+# nps
+![](https://img.shields.io/github/stars/dreamskr/nps.svg)   ![](https://img.shields.io/github/forks/dreamskr/nps.svg)
+[![Gitter](https://badges.gitter.im/cnlh-nps/community.svg)](https://gitter.im/cnlh-nps/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+![Release](https://github.com/dreamskr/nps/workflows/Release/badge.svg)
+![GitHub All Releases](https://img.shields.io/github/downloads/dreamskr/nps/total)
 
-[README](https://github.com/ehang-io/nps/blob/master/README.md)|[中文文档](https://github.com/ehang-io/nps/blob/master/README_zh.md)
+[README](https://github.com/dreamskr/nps/blob/master/README_EN.md)|[中文文档](https://github.com/dreamskr/nps/blob/master/README.md)
 
-# 说明
-由于nps已经有二年多的时间没有更新了，存留了不少bug和未完善的功能。
+nps是一款轻量级、高性能、功能强大的**内网穿透**代理服务器。目前支持**tcp、udp流量转发**，可支持任何**tcp、udp**上层协议（访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析等等……），此外还**支持内网http代理、内网socks5代理**、**p2p等**，并带有功能强大的web管理端。
 
-此版本基于 nps 0.26.10的基础上二次开发而来。
 
-***DockerHub***： [NPS](https://hub.docker.com/r/yisier1/nps) [NPC](https://hub.docker.com/r/yisier1/npc)
+## 一、背景
+![image](https://github.com/dreamskr/nps/blob/master/image/web.png?raw=true)
 
-***宝塔面板***：[宝塔面板 Docker](docs/bt.md)
+1. 做微信公众号开发、小程序开发等----> 域名代理模式
+2. 想在外网通过ssh连接内网的机器，做云服务器到内网服务器端口的映射，----> tcp代理模式
+3. 在非内网环境下使用内网dns，或者需要通过udp访问内网机器等----> udp代理模式
+4. 在外网使用HTTP代理访问内网站点----> http代理模式
+5. 搭建一个内网穿透ss，在外网如同使用内网vpn一样访问内网资源或者设备----> socks5代理模式
+## 二、特点
+- 协议支持全面，兼容几乎所有常用协议，例如tcp、udp、http(s)、socks5、p2p、http代理...
+- 全平台兼容(linux、windows、macos、群辉、OpenWrt等)，支持一键安装为系统服务
+- 控制全面，同时支持服务端和客户端控制
+- https集成，支持将后端代理和web服务转成https，同时支持多证书
+- 操作简单，只需简单的配置即可在web ui上完成其余操作
+- 展示信息全面，流量、系统信息、即时带宽、客户端版本等
+- 扩展功能强大，该有的都有了（缓存、压缩、加密、流量限制、带宽限制、端口复用等等）
+- 域名解析具备自定义header、404页面配置、host修改、站点保护、URL路由、泛解析等功能
+- 服务端支持多用户和用户注册功能
 
-# 交流群
-聊天灌水QQ群：619833483(2000人群),770569342
+**没找到你想要的功能？不要紧，点击[进入文档](https://dreamskr.github.io/nps)查找吧**
 
-# 免费NPS节点
-https://natnps.com/
-免费NPS内网穿透节点，长期免费，6M带宽，3条隧道，欢迎来嫖，自行注册账号。
+## 三、快速开始
 
-# 特价云服务器  
-国内BGP，游戏开服，2核 2G 15M上行 25元/月，[专属连接，首月5折](https://www.rainyun.com/MjY0MzY1_)
+#### 1.安装
+>  通过[Releases](https://github.com/dreamskr/nps/releases)下载对应的版本
 
-# 提示
+下载对应的系统版本即可，服务端和客户端是单独的
+
+#### 2.服务端启动
+下载完服务器压缩包后，解压，然后进入解压后的文件夹
+
+- 执行安装命令
+	* 对于linux|darwin ```sudo ./nps install```
+	* 对于windows，管理员身份运行cmd，进入安装目录 ```nps.exe install```
+
+- 默认端口
+	* nps默认配置文件使用了80，443，9000，9001端口
+	* 80与443端口为域名解析模式默认端口,默认关闭
+	* 9000为web管理访问端口
+	* 9001为网桥端口，用于客户端与服务器通信
+
+- 启动
+	* 对于linux|darwin ```sudo nps start```
+	* 对于windows，管理员身份运行cmd，进入程序目录 ```nps.exe start```
+
+- 注意
+	* nps支持以下命令参数：```start,stop,restart,install,uninstall```
+	* 如果发现没有启动成功，查看日志(Windows日志文件位于当前运行目录下，linux和darwin位于/var/log/nps.log)
+
+#### 3.客户端连接
+- 仅运行客户
+	* 点击web管理中客户端前的+号，复制**客户端运行命令**的命令行
+	* 执行命令，linux直接执行即可，windows将./npc换成npc.exe用cmd执行
+
+- 注册到系统服务
+	* 点击web管理中客户端前的+号，复制**注册到系统服务**的命令行
+	* 执行命令，linux直接执行即可，windows将./npc换成npc.exe用cmd执行
+	* 执行```npc start```即可
+	* npc支持以下命令参数：```start,stop,restart,install,uninstall```
+
+
+- 或删除掉npc.exe 目录下的conf文件夹，运行npc.exe，输入快捷启动命令即可
+
+#### 4.配置
+- 客户端连接后，在web中配置对应穿透服务即可
+- 更多高级用法见[完整文档](https://dreamskr.github.io/nps)
+
+
+## 四、更新日志(于2024-12-22 基于[yisier/nps](https://github.com/yisier/nps)的v0.26.25版本修改)
+- 1.调用新增修改客户端、隧道、域名的API，返回当前新增或修改后的记录json。
+- 2.修改默认日志级别为0。关闭默认http及https默认端口。修改默认端口为9000。默认打开允许本地代理。
+- 3.增加展开客户端时，显示安装或注册系统服务的命令。
+- 4.修改以服务方式安装nps和npc的服务名及显示名称（因特殊场景需要，改了服务名及名称，可Fork回去自行修改）。
+- 5.管理域名和隧道时，客户端ID改成下拉列表选择。
+
+![image](https://user-images.githubusercontent.com/43511466/204796815-c293e805-12f6-431e-a8f7-1d6b91dbbfc3.png)
+
+# 五、提示
 强烈推荐使用无配置文件模式启动客户端（删除掉npc.exe 目录下的`conf`文件夹即可），所有数据应该在服务端保存和配置，而客户端只做连接转发。客户端配置文件对小白极不友好，配置繁琐，容易出错。   
 0.26.21 版本后的客户端，无需再通过命令行方式启动、安装、卸载客户端，直接双击运行，按照提示输入指令即可完成，非常方便。
 
 
-# 更新日志  
+# 六更新日志  
 - 2025-05-28  v0.26.25  
   新增：
   - nps增加`nps(.exe) -server` 命令，用于管理NPS服务，安装和卸载服务在 Linux 下需要有 sudo 权限，Windows 下需要有管理员权限。  
