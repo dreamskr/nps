@@ -184,7 +184,7 @@
                 if (data && data.rows.length > 0) {
                     for (var i = 0; i < data.rows.length; i++) {
                         var option = "<option value=\"" + data.rows[i].Id + "\"";
-                        option += ">" + data.rows[i].Id + '-' + data.rows[i].Remark + "</option>"; //动态添加数据
+                        option += ">" +  data.rows[i].Remark + "</option>"; //动态添加数据 data.rows[i].Id + '-' +
                         $("select[name='client_id']").append(option);
                         $("select[name='client_id']").find("option[value='{{.client_id}}']").attr("selected", true);
                     }
