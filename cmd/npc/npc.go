@@ -432,7 +432,7 @@ func systemPro(flag string, serAddr string, vkey string) {
 	svcConfig := &service.Config{
 		Name:        "nps-client-" + vkey,
 		DisplayName: "nps-client-" + vkey,
-		Description: "NPS内网穿透客户端，支持tcp、udp流量转发，支持内网http代理，地址：https://github.com/yisier/nps",
+		Description: "NPS内网穿透客户端，支持tcp、udp流量转发，支持内网http代理，地址：https://github.com/dreamskr/nps",
 		Option:      options,
 	}
 	s, _ := service.New(prg, svcConfig)
