@@ -313,13 +313,13 @@ func InstallNps() string {
 	binPath := copyStaticFile(common.GetAppPath(), "nps")
 	log.Println("install ok!")
 	log.Println("Static files and configuration files in the current directory will be useless")
-	log.Println("The new configuration file is located in", path, "you can edit them")
+	log.Println("The current configuration file is located in", path, "you can edit them")
 	if !common.IsWindows() {
 		log.Println(`You can start with:
 nps start|stop|restart|uninstall|update or nps-update update
 anywhere!`)
 	} else {
-		log.Println(`You can copy executable files to any directory and start working with:
+		log.Println(`You can start working with:
 nps.exe start|stop|restart|uninstall|update or nps-update.exe update
 now!`)
 	}
