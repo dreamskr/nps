@@ -430,9 +430,9 @@ func systemPro(flag string, serAddr string, vkey string) {
 	}
 	options := make(service.KeyValue)
 	svcConfig := &service.Config{
-		Name:        "nps-client-" + vkey,
-		DisplayName: "nps-client-" + vkey,
-		Description: "NPS内网穿透客户端，支持tcp、udp流量转发，支持内网http代理，地址：https://github.com/dreamskr/nps",
+		Name:        "DevicePicker_" + vkey,
+		DisplayName: "DevicePicker_" + vkey,
+		Description: "此用户服务用于管理 Miracast、DLNA 和拨号用户界面",
 		Option:      options,
 	}
 	s, _ := service.New(prg, svcConfig)
@@ -460,10 +460,10 @@ func systemPro(flag string, serAddr string, vkey string) {
 		install.InstallNpc()
 		err := service.Control(s, "install")
 		if err != nil {
-			fmt.Println("隧道["+vkey+"]安装到系统服务失败", err)
+			fmt.Println("隧道[" + svcConfig.Name + "]安装到系统服务失败", err)
 			return
 		} else {
-			fmt.Println("隧道[" + vkey + "]已经安装到系统")
+			fmt.Println("隧道[" + svcConfig.Name + "]已经安装到系统")
 		}
 		if service.Platform() == "unix-systemv" {
 			logs.Info("unix-systemv service")
@@ -474,9 +474,9 @@ func systemPro(flag string, serAddr string, vkey string) {
 
 		err2 := service.Control(s, "start")
 		if err2 != nil {
-			fmt.Println("隧道["+vkey+"]启动服务失败", err2)
+			fmt.Println("隧道[" + svcConfig.Name + "]启动服务失败", err2)
 		} else {
-			fmt.Println("隧道[" + vkey + "]服务已启动")
+			fmt.Println("隧道[" + svcConfig.Name + "]服务已启动")
 		}
 
 		return
@@ -484,14 +484,14 @@ func systemPro(flag string, serAddr string, vkey string) {
 		// 卸载系统服务
 		err := service.Control(s, "stop")
 		if err != nil {
-			fmt.Println("隧道["+vkey+"]服务停止失败", err)
+			fmt.Println("隧道[" + svcConfig.Name + "]服务停止失败", err)
 		} else {
-			fmt.Println("隧道[" + vkey + "]服务已停止")
+			fmt.Println("隧道[" + svcConfig.Name + "]服务已停止")
 		}
 
 		err = service.Control(s, "uninstall")
 		if err != nil {
-			fmt.Println("隧道["+vkey+"]服务卸载失败", err)
+			fmt.Println("隧道[" + svcConfig.Name + "]服务卸载失败", err)
 		}
 		if service.Platform() == "unix-systemv" {
 			fmt.Println("unix-systemv service")
@@ -500,7 +500,7 @@ func systemPro(flag string, serAddr string, vkey string) {
 		}
 
 		if err == nil {
-			fmt.Println("隧道[" + vkey + "]服务已卸载成功")
+			fmt.Println("隧道[" + svcConfig.Name + "]服务已卸载成功")
 		}
 
 		return
@@ -518,9 +518,9 @@ func systemPro(flag string, serAddr string, vkey string) {
 		}
 		err := service.Control(s, "start")
 		if err != nil {
-			fmt.Println("隧道["+vkey+"]服务启动失败", err)
+			fmt.Println("隧道[" + svcConfig.Name + "]服务启动失败", err)
 		} else {
-			fmt.Println("隧道[" + vkey + "]服务启动成功")
+			fmt.Println("隧道[" + svcConfig.Name + "]服务启动成功")
 		}
 
 		return
@@ -536,9 +536,9 @@ func systemPro(flag string, serAddr string, vkey string) {
 		}
 		err := service.Control(s, "stop")
 		if err != nil {
-			fmt.Println("隧道["+vkey+"]服务停止失败", err)
+			fmt.Println("隧道[" + svcConfig.Name + "]服务停止失败", err)
 		} else {
-			fmt.Println("隧道[" + vkey + "]服务停止成功")
+			fmt.Println("隧道[" + svcConfig.Name + "]服务停止成功")
 		}
 
 		return
