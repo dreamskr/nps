@@ -215,6 +215,10 @@
 		<zh-CN>客户端命令</zh-CN>
 		<en-US>Command</en-US>
 	</lang>
+	<lang id="word-installcommandclient">
+		<zh-CN>注册到系统服务</zh-CN>
+		<en-US>install Command</en-US>
+	</lang>
 	<lang id="word-commandclient-tls">
 		<zh-CN>TLS 启动命令</zh-CN>
 		<en-US>TLS Command</en-US>
