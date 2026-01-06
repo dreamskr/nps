@@ -82,13 +82,22 @@
                 halign: 'center',
                 visible: true//false表示不显示
             },
+            // {
+            //     field: 'Id',//域值
+            //     title: '<span langtag="word-clientid"></span>',//标题
+            //     halign: 'center',
+            //     visible: true,//false表示不显示
+            //     formatter: function (value, row, index) {
+            //         return row.Client.Id + '-' + row.Client.Remark
+            //     }
+            // },
             {
-                field: 'Id',//域值
-                title: '<span langtag="word-clientid"></span>',//标题
+                field: 'sName',//域值
+                title: '<span langtag="word-belongclient"></span>',//标题
                 halign: 'center',
                 visible: true,//false表示不显示
                 formatter: function (value, row, index) {
-                    return row.Client.Id + '-' + row.Client.Remark
+                    return row.Client.Remark
                 }
             },
             {
@@ -101,7 +110,7 @@
                 field: 'Client.VerifyKey',//域值
                 title: '<span langtag="word-verifykey"></span>',//标题
                 halign: 'center',
-                visible: true//false表示不显示
+                visible: false//false表示不显示
             },
             {
                 field: 'Host',//域值
