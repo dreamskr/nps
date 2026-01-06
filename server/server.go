@@ -282,11 +282,17 @@ func GetTunnel(start, length int, typeVal string, clientId int, search string, s
 		} else {
 			sort.SliceStable(all_list, func(i, j int) bool { return all_list[i].Client.VerifyKey > all_list[j].Client.VerifyKey })
 		}
-	} else if sortField == "Target" {
+	} else if sortField == "TargetStr" {
 		if order == "asc" {
 			sort.SliceStable(all_list, func(i, j int) bool { return all_list[i].Target.TargetStr < all_list[j].Target.TargetStr })
 		} else {
 			sort.SliceStable(all_list, func(i, j int) bool { return all_list[i].Target.TargetStr > all_list[j].Target.TargetStr })
+		}
+	}  else {
+		if order=="asc"{
+			sort.SliceStable(all_list, func(i, j int) bool { return all_list[i].Port < all_list[j].Port })
+		} else {
+			sort.SliceStable(all_list, func(i, j int) bool { return all_list[i].Port > all_list[j].Port })
 		}
 	}
 
