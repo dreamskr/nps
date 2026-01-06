@@ -76,6 +76,7 @@
                 + '<b langtag="word-lastonlinetime"></b>: ' + row.LastOnlineTime + '&emsp;<br/><br/>'
                 + '<b langtag="word-quicklycommand"></b>: <span>' + encodeToBase64('{{.ip}}:{{.p}} ' + row.VerifyKey)   + '</span>&emsp;<button class="copy btn btn-info btn-xs" onclick="copyCommand(this)" data-clipboard-text="">复制</button><br/>'
                 + '<b langtag="word-tlsquicklycommand"></b>: <span>' + encodeToBase64('{{.ip}}:{{.tls_p}} ' + row.VerifyKey + ' true')   + '</span>&emsp;<button class="copy btn btn-info btn-xs" onclick="copyCommand(this)" data-clipboard-text="">复制</button><br/>'
+                + '<b langtag="word-installcommandclient"></b>: ' + "<code>./npc{{.win}} install -server={{.ip}}:{{.p}} -vkey=" + row.VerifyKey + " -type=" +{{.bridgeType}} + " -log_level=4</code>"  +"</code><button class=\"copy btn btn-info btn-xs\" onclick=\"copyCommand(this)\" data-clipboard-text=\"\">复制</button><br/>"
                 + '<b langtag="word-commandclient"></b>: ' + "<code>./npc{{.win}} -server={{.ip}}:{{.p}} -vkey=" + row.VerifyKey + " -type=" +{{.bridgeType}} +"</code><button class=\"copy btn btn-info btn-xs\" onclick=\"copyCommand(this)\" data-clipboard-text=\"\">复制</button><br/>"
                 + '<b langtag="word-commandclient-tls"></b>: ' + "<code>./npc{{.win}} -server={{.ip}}:{{.tls_p}} -vkey=" + row.VerifyKey + " -tls_enable=true</code><button class=\"copy btn btn-info btn-xs\" onclick=\"copyCommand(this)\" data-clipboard-text=\"\">复制</button>"
         },
