@@ -92,6 +92,10 @@
 		<zh-CN>UDP 隧道列表</zh-CN>
 		<en-US>UDP list</en-US>
 	</lang>
+	<lang id="tcp-remark">
+		<zh-CN>(端口备注)</zh-CN>
+		<en-US>(port remark)</en-US>
+	</lang>
 	<lang id="page-listhttpproxy">
 		<zh-CN>HTTP 代理列表</zh-CN>
 		<en-US>HTTP proxy list</en-US>
@@ -157,6 +161,10 @@
 		<zh-CN>桥接模式</zh-CN>
 		<en-US>Bridging mode</en-US>
 	</lang>
+	<lang id="word-belongclient">
+		<zh-CN>所属客户端</zh-CN>
+		<en-US>Blong Client</en-US>
+	</lang>
 	<lang id="word-clientid">
 		<zh-CN>客户端 ID</zh-CN>
 		<en-US>Client ID</en-US>
@@ -211,9 +219,7 @@
 		<zh-CN>TLS 启动命令</zh-CN>
 		<en-US>TLS Command</en-US>
 	</lang>
-
-
-
+	
 	<lang id="word-compress">
 		<zh-CN>压缩</zh-CN>
 		<en-US>Compress</en-US>
