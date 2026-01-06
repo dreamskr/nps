@@ -5,7 +5,7 @@
             <div class="ibox-content">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label class="control-label font-bold" langtag="word-clientid"></label>
+                        <label class="control-label font-bold" langtag="word-belongclient"></label>
                         <div class="col-sm-10">
                             <select class="form-control" name="client_id" placeholder=""
                                     langtag="word-belongclient"></select>
@@ -185,7 +185,7 @@
                 if (data && data.rows.length > 0) {
                     for (var i = 0; i < data.rows.length; i++) {
                         var option = "<option value=\"" + data.rows[i].Id + "\"";
-                        option += ">" + data.rows[i].Id + '-' + data.rows[i].Remark + "</option>"; //动态添加数据
+                        option += ">" + data.rows[i].Remark + "</option>"; //动态添加数据
                         $("select[name='client_id']").append(option);
                     }
                 }
