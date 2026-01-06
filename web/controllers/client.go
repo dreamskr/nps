@@ -78,7 +78,13 @@ func (s *ClientController) Add() {
 		if err := file.GetDb().NewClient(t); err != nil {
 			s.AjaxErr(err.Error())
 		}
-		s.AjaxOkWithId("add success", id)
+		// s.AjaxOkWithId("add success", id)
+		data := make(map[string]interface{})
+		data["msg"] = "add success"
+		data["status"] = 1
+		data["data"] = t
+		s.Data["json"] = data
+		s.ServeJSON()
 	}
 }
 func (s *ClientController) GetClient() {
@@ -103,6 +109,8 @@ func (s *ClientController) Edit() {
 		s.Data["menu"] = "client"
 		if c, err := file.GetDb().GetClient(id); err != nil {
 			s.error()
+			s.AjaxErr("client id no exist")
+			return
 		} else {
 			s.Data["c"] = c
 			s.Data["BlackIpList"] = strings.Join(c.BlackIpList, "\r\n")
@@ -160,8 +168,15 @@ func (s *ClientController) Edit() {
 
 			c.BlackIpList = RemoveRepeatedElement(strings.Split(s.getEscapeString("blackiplist"), "\r\n"))
 			file.GetDb().JsonDb.StoreClientsToJsonFile()
+			//返回更新的json
+			data := make(map[string]interface{})
+			data["msg"] = "modified success"
+			data["status"] = 1
+			data["data"] = c
+			s.Data["json"] = data
+			s.ServeJSON()
 		}
-		s.AjaxOk("save success")
+		// s.AjaxOk("save success")
 	}
 }
 
@@ -194,7 +209,14 @@ func (s *ClientController) ChangeStatus() {
 		if client.Status == false {
 			server.DelClientConnect(client.Id)
 		}
-		s.AjaxOk("modified success")
+		// s.AjaxOk("modified success")
+		//返回更新的json
+		data := make(map[string]interface{})
+		data["msg"] = "modified success"
+		data["status"] = 1
+		data["data"] = client
+		s.Data["json"] = data
+		s.ServeJSON()
 	}
 	s.AjaxErr("modified fail")
 }
