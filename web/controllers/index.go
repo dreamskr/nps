@@ -186,7 +186,7 @@ func (s *IndexController) Copy() {
 			data := make(map[string]interface{})
 			data["msg"] = "add success"
 			data["status"] = 1
-			data["data"] = t
+			data["data"] = newTask
 			s.Data["json"] = data
 			s.ServeJSON()
 		}
